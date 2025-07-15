@@ -1,5 +1,5 @@
-import PillDoseBuddyDashboard from '@/components/pill-dose-buddy-dashboard'
+import PillDoseBuddyDashboardVertical from '@/components/pill-dose-buddy-dashboard-vertical'
 
 export default function DashboardPage() {
-  return <PillDoseBuddyDashboard />
+  return <PillDoseBuddyDashboardVertical />
 }

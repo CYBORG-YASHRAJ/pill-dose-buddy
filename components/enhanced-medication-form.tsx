@@ -14,18 +14,19 @@ import { firebaseService } from '@/lib/firebase-service'
 interface MedicationFormProps {
   onSubmit: () => void
   onCancel: () => void
+  medication?: any // Optional medication for editing
 }
 
-export default function EnhancedMedicationForm({ onSubmit, onCancel }: MedicationFormProps) {
+export default function EnhancedMedicationForm({ onSubmit, onCancel, medication }: MedicationFormProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    chamber: 0,
-    pills: 1,
-    hour: 9,
-    minute: 0,
-    fromDate: new Date().toISOString().split('T')[0],
-    toDate: '',
-    conditions: ''
+    name: medication?.name || '',
+    chamber: medication?.chamber || 0,
+    pills: medication?.pillCount || 1,
+    hour: medication?.time ? parseInt(medication.time.split(':')[0]) : 9,
+    minute: medication?.time ? parseInt(medication.time.split(':')[1]) : 0,
+    fromDate: medication?.fromDate || new Date().toISOString().split('T')[0],
+    toDate: medication?.toDate || '',
+    conditions: medication?.conditions || ''
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -61,16 +62,29 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel }: Medicatio
         conditions: formData.conditions || undefined
       }
 
-      // Add to Firebase
-      await firebaseService.addDose(dose)
+      if (medication) {
+        // Update existing medication
+        await firebaseService.updateDose(medication.id, dose)
+        
+        // Create notification for update
+        await firebaseService.addNotification({
+          type: 'doseDispensed',
+          message: `Medication "${formData.name}" updated successfully`,
+          data: { action: 'medication_updated' },
+          read: false
+        })
+      } else {
+        // Add new medication
+        await firebaseService.addDose(dose)
 
-      // Create notification
-      await firebaseService.addNotification({
-        type: 'doseDispensed',
-        message: `New medication "${formData.name}" added successfully`,
-        data: { action: 'medication_added' },
-        read: false
-      })
+        // Create notification for add
+        await firebaseService.addNotification({
+          type: 'doseDispensed',
+          message: `New medication "${formData.name}" added successfully`,
+          data: { action: 'medication_added' },
+          read: false
+        })
+      }
 
       onSubmit()
     } catch (err) {
@@ -110,7 +124,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel }: Medicatio
         <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-lg">
           <CardTitle className="flex items-center gap-2">
             <Plus className="h-6 w-6" />
-            Add New Medication
+            {medication ? 'Edit Medication' : 'Add New Medication'}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">

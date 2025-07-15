@@ -139,6 +139,22 @@ export class FirebaseService {
     return newDoseRef.key
   }
 
+  async updateDose(doseId: string, dose: Partial<Dose>) {
+    if (!this.userId) throw new Error("User not authenticated")
+    
+    const doseRef = ref(database, `users/${this.userId}/doses/${doseId}`)
+    await update(doseRef, dose)
+    return doseId
+  }
+
+  async deleteDose(doseId: string) {
+    if (!this.userId) throw new Error("User not authenticated")
+    
+    const doseRef = ref(database, `users/${this.userId}/doses/${doseId}`)
+    await set(doseRef, null) // Setting to null effectively deletes the node
+    return doseId
+  }
+
   async getUserDoses(): Promise<Record<string, Dose>> {
     if (!this.userId) return {}
     
