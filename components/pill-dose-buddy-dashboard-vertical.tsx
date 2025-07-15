@@ -448,6 +448,43 @@ export default function PillDoseBuddyDashboard() {
     }
   }
 
+  // AI Report Generation
+  const [generatingReport, setGeneratingReport] = useState(false)
+  const [healthReport, setHealthReport] = useState<any>(null)
+
+  const generateHealthReport = async (reportType: string) => {
+    setGeneratingReport(true)
+    try {
+      const response = await fetch('/api/reports', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          reportType,
+          context: {
+            language: currentLanguage,
+            doses: Object.values(dashboardData.doses),
+            notifications: dashboardData.notifications,
+            memberInfo: selectedMember,
+            history: Object.values(dashboardData.doses).slice(-30) // Last 30 entries
+          }
+        }),
+      })
+      
+      const data = await response.json()
+      if (data.success) {
+        setHealthReport(data.report)
+      } else {
+        console.error('Failed to generate report:', data.error)
+      }
+    } catch (error) {
+      console.error('Error generating report:', error)
+    } finally {
+      setGeneratingReport(false)
+    }
+  }
+
   // Initialize Firebase and set up real-time listeners
   useEffect(() => {
     let unsubscribeFunctions: (() => void)[] = []
@@ -1132,9 +1169,126 @@ export default function PillDoseBuddyDashboard() {
                     <CardTitle className="flex items-center gap-3 text-xl text-gray-800">
                       <BarChart3 className="h-6 w-6 text-blue-600" />
                       {t('medicineReport')}
+                      <Badge className="bg-blue-100 text-blue-700 ml-auto">
+                        <Brain className="h-4 w-4 mr-1" />
+                        AI-Powered
+                      </Badge>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
+                    {/* AI Report Generation Buttons */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                      <Button
+                        onClick={() => generateHealthReport('adherence-analysis')}
+                        disabled={generatingReport}
+                        className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white p-6 h-auto flex flex-col items-center gap-3 hover:from-blue-600 hover:to-cyan-700"
+                      >
+                        <TrendingUp className="h-8 w-8" />
+                        <div className="text-center">
+                          <p className="font-semibold">Adherence Analysis</p>
+                          <p className="text-xs opacity-90">AI medication patterns</p>
+                        </div>
+                      </Button>
+
+                      <Button
+                        onClick={() => generateHealthReport('health-insights')}
+                        disabled={generatingReport}
+                        className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-6 h-auto flex flex-col items-center gap-3 hover:from-green-600 hover:to-emerald-700"
+                      >
+                        <Activity className="h-8 w-8" />
+                        <div className="text-center">
+                          <p className="font-semibold">Health Insights</p>
+                          <p className="text-xs opacity-90">AI health analysis</p>
+                        </div>
+                      </Button>
+
+                      <Button
+                        onClick={() => generateHealthReport('optimization-suggestions')}
+                        disabled={generatingReport}
+                        className="bg-gradient-to-r from-purple-500 to-violet-600 text-white p-6 h-auto flex flex-col items-center gap-3 hover:from-purple-600 hover:to-violet-700"
+                      >
+                        <Target className="h-8 w-8" />
+                        <div className="text-center">
+                          <p className="font-semibold">Optimization</p>
+                          <p className="text-xs opacity-90">AI schedule optimization</p>
+                        </div>
+                      </Button>
+                    </div>
+
+                    {/* Loading State */}
+                    {generatingReport && (
+                      <Card className="bg-blue-50 border-blue-200">
+                        <CardContent className="p-6 text-center">
+                          <div className="flex items-center justify-center gap-3 mb-4">
+                            <div className="animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
+                            <Brain className="h-8 w-8 text-blue-600 animate-pulse" />
+                          </div>
+                          <p className="text-blue-700 font-semibold text-lg">
+                            {currentLanguage === 'hi' ? 'AI रिपोर्ट तैयार कर रहा है...' : 'AI is generating your health report...'}
+                          </p>
+                          <p className="text-blue-600 text-sm mt-2">
+                            {currentLanguage === 'hi' ? 'कृपया प्रतीक्षा करें' : 'Please wait while we analyze your data'}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* AI Generated Report */}
+                    {healthReport && (
+                      <Card className="bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200">
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-3">
+                            <Brain className="h-6 w-6 text-blue-600" />
+                            AI Health Report
+                            <Badge className="bg-blue-500 text-white">
+                              Generated {new Date(healthReport.generatedAt).toLocaleTimeString()}
+                            </Badge>
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          {healthReport.summary && (
+                            <div className="bg-white p-4 rounded-lg border border-blue-200">
+                              <h4 className="font-semibold text-gray-800 mb-2">Executive Summary</h4>
+                              <p className="text-gray-700 whitespace-pre-wrap">{healthReport.summary}</p>
+                            </div>
+                          )}
+                          
+                          {healthReport.recommendations && (
+                            <div className="bg-white p-4 rounded-lg border border-green-200">
+                              <h4 className="font-semibold text-gray-800 mb-2">AI Recommendations</h4>
+                              <p className="text-gray-700 whitespace-pre-wrap">{healthReport.recommendations}</p>
+                            </div>
+                          )}
+
+                          <div className="flex gap-3">
+                            <Button
+                              onClick={() => setHealthReport(null)}
+                              variant="outline"
+                              className="border-gray-300"
+                            >
+                              Close Report
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                // Download or share report functionality
+                                const reportText = healthReport.fullReport
+                                const blob = new Blob([reportText], { type: 'text/plain' })
+                                const url = URL.createObjectURL(blob)
+                                const a = document.createElement('a')
+                                a.href = url
+                                a.download = `doseBuddy-health-report-${new Date().toISOString().split('T')[0]}.txt`
+                                a.click()
+                              }}
+                              className="bg-blue-500 hover:bg-blue-600 text-white"
+                            >
+                              Download Report
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Traditional Stats */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                       <div className="bg-green-50 p-6 rounded-xl border border-green-200 text-center">
                         <p className="text-3xl font-bold text-green-600">78%</p>
