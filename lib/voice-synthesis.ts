@@ -23,14 +23,16 @@ export class VoiceSynthesis {
     }
   }
   
-  private getVoiceForLanguage(language: 'en' | 'hi'): SpeechSynthesisVoice | null {
+  private getVoiceForLanguage(language: 'en' | 'hi' | 'ta' | 'pa'): SpeechSynthesisVoice | null {
     if (!this.voices.length) {
       this.loadVoices()
     }
     
     const voiceMap = {
       'en': ['en-US', 'en-GB', 'en-AU'],
-      'hi': ['hi-IN', 'hi']
+      'hi': ['hi-IN', 'hi'],
+      'ta': ['ta-IN', 'ta'],
+      'pa': ['pa-IN', 'pa-Guru', 'pa']
     }
     
     const preferredLangs = voiceMap[language]
@@ -44,8 +46,8 @@ export class VoiceSynthesis {
     // Fallback to default voice
     return this.voices[0] || null
   }
-  
-  speak(text: string, language: 'en' | 'hi' = 'en', options: {
+
+  speak(text: string, language: 'en' | 'hi' | 'ta' | 'pa' = 'en', options: {
     rate?: number
     pitch?: number
     volume?: number
@@ -72,7 +74,13 @@ export class VoiceSynthesis {
       utterance.volume = options.volume || 1
       
       // Set language
-      utterance.lang = language === 'hi' ? 'hi-IN' : 'en-US'
+      const langMap = {
+        'en': 'en-US',
+        'hi': 'hi-IN', 
+        'ta': 'ta-IN',
+        'pa': 'pa-IN'
+      }
+      utterance.lang = langMap[language] || 'en-US'
       
       utterance.onend = () => resolve()
       utterance.onerror = (event) => reject(new Error(event.error))
@@ -116,7 +124,7 @@ export class VoiceSynthesis {
 export const voiceSynthesis = new VoiceSynthesis()
 
 // Utility function for easy use
-export const speakText = (text: string, language: 'en' | 'hi' = 'en') => {
+export const speakText = (text: string, language: 'en' | 'hi' | 'ta' = 'en') => {
   return voiceSynthesis.speak(text, language)
 }
 
@@ -127,7 +135,7 @@ export const useVoiceSynthesis = () => {
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isSupported] = useState(() => voiceSynthesis.isSupported())
   
-  const speak = useCallback(async (text: string, language: 'en' | 'hi' = 'en') => {
+  const speak = useCallback(async (text: string, language: 'en' | 'hi' | 'ta' | 'pa' = 'en') => {
     if (!isSupported) {
       console.warn('Voice synthesis not supported')
       return

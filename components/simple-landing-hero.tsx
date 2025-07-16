@@ -24,7 +24,7 @@ import {
   Target
 } from 'lucide-react'
 
-// Comprehensive translations object for English and Hindi
+// Comprehensive translations object for English, Hindi, and Tamil
 const translations = {
   en: {
     // Main content
@@ -33,7 +33,7 @@ const translations = {
     doseAgain: "DoseBuddy intelligence",
     revolutionaryDescription: "Revolutionary AI-powered DoseBuddy system with real-time monitoring, personalized healthcare insights, intelligent dose analysis, and seamless medication management powered by advanced AI.",
     aiPowered: "AI-powered DoseBuddy system",
-    getStarted: "Get Started with AI",
+    getStarted: "Get Started",
     viewDemo: "View AI Demo",
     
     // Features
@@ -68,7 +68,9 @@ const translations = {
     
     // Language
     english: "English",
-    hindi: "हिंदी"
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ"
   },
   hi: {
     // Main content
@@ -77,7 +79,7 @@ const translations = {
     doseAgain: "डोज़बडी बुद्धिमत्ता",
     revolutionaryDescription: "क्रांतिकारी AI-संचालित डोज़बडी सिस्टम जो वास्तविक समय निगरानी, व्यक्तिगत स्वास्थ्य अंतर्दृष्टि, बुद्धिमान खुराक विश्लेषण और उन्नत AI द्वारा संचालित निर्बाध दवा प्रबंधन प्रदान करता है।",
     aiPowered: "AI-संचालित डोज़बडी सिस्टम",
-    getStarted: "AI के साथ शुरू करें",
+    getStarted: "शुरू करें",
     viewDemo: "AI डेमो देखें",
     
     // Features
@@ -112,7 +114,100 @@ const translations = {
     
     // Language
     english: "English",
-    hindi: "हिंदी"
+    hindi: "हिंदी",
+    tamil: "தமிழ்"
+  },
+  ta: {
+    // Main content
+    aiPoweredHealthcare: "AI-இயங்கும் டோஸ்பட்டி",
+    neverMissA: "AI-இயங்கும் ஸ்மார்ட் மருந்துடன்",
+    doseAgain: "டோஸ்பட்டி நுண்ணறிவு",
+    revolutionaryDescription: "உண்மையான நேர கண்காணிப்பு, தனிப்பயன் சுகாதார நுண்ணறிவுகள், புத்திசாலித்தனமான டோஸ் பகுப்பாய்வு மற்றும் மேம்பட்ட AI ஆல் இயங்கும் தடையற்ற மருந்து மேலாண்மையுடன் கூடிய புரட்சிகரமான AI-இயங்கும் டோஸ்பட்டி அமைப்பு।",
+    aiPowered: "AI-இயங்கும் டோஸ்பட்டி அமைப்பு",
+    getStarted: "தொடங்குங்கள்",
+    viewDemo: "AI டெமோவைப் பார்க்கவும்",
+    
+    // Features
+    aiPoweredFeature: "AI-இயங்கும்",
+    smartMedicationInsights: "ஸ்மார்ட் மருந்து நுண்ணறிவுகள்",
+    realTimeAlerts: "உண்மையான நேர எச்சரிக்கைகள்",
+    neverMissADose: "ஒரு டோஸை இழக்காதீர்கள்",
+    secureAndSafe: "பாதுகாப்பான மற்றும் பாதுகாப்பு",
+    hipaaCompliant: "HIPAA இணக்கம்",
+    healthMonitoring: "சுகாதார கண்காணிப்பு",
+    trackAdherence: "பின்பற்றுதல் வடிவங்களைக் கண்காணிக்கவும்",
+    
+    // Stats
+    accuracy: "துல்லியம்",
+    monitoring: "கண்காணிப்பு",
+    livesImproved: "வாழ்க்கை மேம்பாடு",
+    responseTime: "பதில் நேரம்",
+    
+    // Device showcase
+    connected: "இணைக்கப்பட்டது",
+    seamlesslySync: "உங்கள் அனைத்து சாதனங்களிலும் தடையற்ற ஒத்திசைவு",
+    
+    // CTA
+    readyToRevolutionize: "உங்கள் சுகாதாரத்தில் புரட்சி செய்ய தயாரா?",
+    joinThousands: "AI-இயங்கும் டோஸ்பட்டியுடன் ஒரு டோஸையும் இழக்காத ஆயிரக்கணக்கான நோயாளிகளுடன் சேருங்கள்",
+    startYourJourney: "உங்கள் பயணத்தைத் தொடங்குங்கள்",
+    noCreditCard: "கிரெடிட் கார்டு தேவையில்லை",
+    
+    // Notification
+    timeForMedication: "உங்கள் மருந்து நேரம்!",
+    aspirinTablet: "ஆஸ்பிரின் - 1 மாத்திரை",
+    
+    // Language
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ"
+  },
+  pa: {
+    // Main content
+    aiPoweredHealthcare: "AI-ਸੰਚਾਲਿਤ ਡੋਜ਼ਬੱਡੀ",
+    neverMissA: "AI-ਸੰਚਾਲਿਤ ਸਮਾਰਟ ਦਵਾਈ ਨਾਲ",
+    doseAgain: "ਡੋਜ਼ਬੱਡੀ ਬੁੱਧੀ",
+    revolutionaryDescription: "ਅਸਲ ਸਮੇਂ ਦੀ ਨਿਗਰਾਨੀ, ਵਿਅਕਤੀਗਤ ਸਿਹਤ ਸੂਝ-ਬੂਝ, ਬੁੱਧੀਮਾਨ ਡੋਜ਼ ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਉੱਨਤ AI ਦੁਆਰਾ ਸੰਚਾਲਿਤ ਨਿਰਬਾਧ ਦਵਾਈ ਪ੍ਰਬੰਧਨ ਦੇ ਨਾਲ ਕ੍ਰਾਂਤੀਕਾਰੀ AI-ਸੰਚਾਲਿਤ ਡੋਜ਼ਬੱਡੀ ਸਿਸਟਮ।",
+    aiPowered: "AI-ਸੰਚਾਲਿਤ ਡੋਜ਼ਬੱਡੀ ਸਿਸਟਮ",
+    getStarted: "ਸ਼ੁਰੂ ਕਰੋ",
+    viewDemo: "AI ਡੈਮੋ ਵੇਖੋ",
+    
+    // Features
+    aiPoweredFeature: "AI-ਸੰਚਾਲਿਤ",
+    smartMedicationInsights: "ਸਮਾਰਟ ਦਵਾਈ ਸੂਝ-ਬੂਝ",
+    realTimeAlerts: "ਅਸਲ ਸਮੇਂ ਦੇ ਅਲਰਟ",
+    neverMissADose: "ਕਦੇ ਡੋਜ਼ ਨਾ ਚੁੱਕੋ",
+    secureAndSafe: "ਸੁਰੱਖਿਅਤ ਅਤੇ ਸੇਫ",
+    hipaaCompliant: "HIPAA ਅਨੁਕੂਲ",
+    healthMonitoring: "ਸਿਹਤ ਨਿਗਰਾਨੀ",
+    trackAdherence: "ਪਾਲਣਾ ਪੈਟਰਨ ਟਰੈਕ ਕਰੋ",
+    
+    // Stats
+    accuracy: "ਸਟੀਕਤਾ",
+    monitoring: "ਨਿਗਰਾਨੀ",
+    livesImproved: "ਜੀਵਨ ਵਿੱਚ ਸੁਧਾਰ",
+    responseTime: "ਜਵਾਬ ਸਮਾਂ",
+    
+    // Device showcase
+    connected: "ਜੁੜਿਆ ਹੋਇਆ",
+    seamlesslySync: "ਤੁਹਾਡੇ ਸਾਰੇ ਡਿਵਾਇਸਾਂ ਵਿੱਚ ਨਿਰਬਾਧ ਸਿੰਕ",
+    
+    // CTA
+    readyToRevolutionize: "ਆਪਣੀ ਸਿਹਤ ਸੰਭਾਲ ਵਿੱਚ ਕ੍ਰਾਂਤੀ ਲਿਆਉਣ ਲਈ ਤਿਆਰ ਹੋ?",
+    joinThousands: "AI-ਸੰਚਾਲਿਤ ਡੋਜ਼ਬੱਡੀ ਨਾਲ ਹਜ਼ਾਰਾਂ ਮਰੀਜ਼ਾਂ ਨਾਲ ਜੁੜੋ ਜੋ ਕਦੇ ਡੋਜ਼ ਨਹੀਂ ਚੁੱਕਦੇ",
+    startYourJourney: "ਆਪਣਾ ਸਫਰ ਸ਼ੁਰੂ ਕਰੋ",
+    noCreditCard: "ਕੋਈ ਕ੍ਰੈਡਿਟ ਕਾਰਡ ਦੀ ਲੋੜ ਨਹੀਂ",
+    
+    // Notification
+    timeForMedication: "ਤੁਹਾਡੀ ਦਵਾਈ ਦਾ ਸਮਾਂ!",
+    aspirinTablet: "ਐਸਪਰਿਨ - 1 ਗੋਲੀ",
+    
+    // Language
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ"
   }
 }
 
@@ -139,11 +234,14 @@ const TypewriterText = ({ text }: { text: string }) => {
 
 export function LandingHero({ onGetStarted }: LandingHeroProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const [currentLanguage, setCurrentLanguage] = useState<'en' | 'hi'>('en')
+  const [currentLanguage, setCurrentLanguage] = useState<'en' | 'hi' | 'ta' | 'pa'>('en')
   const router = useRouter()
 
   // Translation helper function
-  const t = (key: string) => translations[currentLanguage][key as keyof typeof translations['en']] || key
+  const t = (key: string) => {
+    const translation = translations[currentLanguage] as Record<string, string>
+    return translation[key] || key
+  }
 
   useEffect(() => {
     setIsVisible(true)
@@ -205,11 +303,13 @@ export function LandingHero({ onGetStarted }: LandingHeroProps) {
           <div className="flex items-center gap-4">
             <select 
               value={currentLanguage} 
-              onChange={(e) => setCurrentLanguage(e.target.value as 'en' | 'hi')}
+              onChange={(e) => setCurrentLanguage(e.target.value as 'en' | 'hi' | 'ta' | 'pa')}
               className="bg-white border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium shadow-sm"
             >
               <option value="en">{t('english')}</option>
               <option value="hi">{t('hindi')}</option>
+              <option value="ta">{t('tamil')}</option>
+              <option value="pa">{t('punjabi')}</option>
             </select>
           </div>
         </div>

@@ -51,7 +51,7 @@ import { firebaseService, type Dose, type Notification, type PillDispenser } fro
 import EnhancedMedicationForm from '@/components/enhanced-medication-form'
 import { useVoiceSynthesis } from '@/lib/voice-synthesis'
 
-// Comprehensive translations object for English and Hindi
+// Comprehensive translations object for English, Hindi, and Tamil
 const translations = {
   en: {
     // App and Navigation
@@ -70,6 +70,7 @@ const translations = {
     // Language
     english: "English",
     hindi: "हिंदी",
+    tamil: "தமிழ்",
     
     // Member Management
     goodMorning: "Good Morning",
@@ -185,6 +186,8 @@ const translations = {
     // Language
     english: "English", 
     hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ",
     
     // Member Management
     goodMorning: "सुप्रभात",
@@ -282,6 +285,240 @@ const translations = {
     successful: "सफल",
     failed: "असफल",
     lastSeen: "अंतिम बार देखा गया"
+  },
+  ta: {
+    // App and Navigation
+    appName: "டோஸ்பட்டி",
+    tagline: "ஸ்மார்ட் மருந்து மேலாண்மை அமைப்பு",
+    aiPowered: "AI-இயங்கும் சுகாதார சேவை",
+    dashboard: "டாஷ்போர்டு",
+    medications: "மருந்துகள்",
+    schedule: "அட்டவணை",
+    members: "உறுப்பினர்கள்",
+    reports: "அறிக்கைகள்",
+    aiAssistant: "AI உதவியாளர்",
+    notifications: "அறிவிப்புகள்",
+    settings: "அமைப்புகள்",
+    
+    // Language
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ",
+    
+    // Member Management
+    goodMorning: "காலை வணக்கம்",
+    goodAfternoon: "மதிய வணக்கம்",
+    goodEvening: "மாலை வணக்கம்",
+    memberYou: "நீங்கள்",
+    familyMember1: "குடும்ப உறுப்பினர் 1",
+    familyMember2: "குடும்ப உறுப்பினர் 2",
+    addMember: "உறுப்பினரைச் சேர்க்கவும்",
+    medicationSchedule: "இன்றைய உங்கள் மருந்து அட்டவணை இதோ",
+    
+    // AI Assistant
+    aiHealthAssistant: "AI சுகாதார உதவியாளர்",
+    aiDescription: "உண்மையான நேர கண்காணிப்பு மற்றும் ஸ்மார்ட் பரிந்துரைகள்",
+    smartAnalysis: "ஸ்மார்ட் பகுப்பாய்வு",
+    smartAnalysisDesc: "AI உங்கள் மருந்து வடிவங்களைக் கண்காணிக்கிறது",
+    smartAlerts: "ஸ்மார்ட் எச்சரிக்கைகள்",
+    smartAlertsDesc: "தனிப்பயன் மருந்து நினைவூட்டல்கள்",
+    healthInsights: "சுகாதார நுண்ணறிவுகள்",
+    healthInsightsDesc: "பின்பற்றுதல் மற்றும் சுகாதார போக்குகளைக் கண்காணிக்கவும்",
+    active: "செயலில்",
+    
+    // Status Cards
+    smartDispenser: "ஸ்மார்ட் டிஸ்பென்சர்",
+    online: "ஆன்லைன்",
+    offline: "ஆஃப்லைன்",
+    unread: "படிக்கப்படாத",
+    missedDoses: "தவறிய டோஸ்கள்",
+    pending: "நிலுவையில்",
+    adherence: "பின்பற்றுதல்",
+    
+    // Medications
+    todaysMedications: "இன்றைய மருந்துகள்",
+    allMedications: "அனைத்து மருந்துகள்",
+    addMedication: "மருந்து சேர்க்கவும்",
+    addNew: "புதியதைச் சேர்க்கவும்",
+    editMedication: "மருந்தைத் திருத்தவும்",
+    deleteMedication: "மருந்தை நீக்கவும்",
+    noMedicationsToday: "இன்று எந்த மருந்தும் திட்டமிடப்படவில்லை",
+    scheduleTodayMedications: "இன்றைய மருந்துகளைத் திட்டமிடுங்கள்",
+    noMedicationsFound: "மருந்துகள் எதுவும் காணப்படவில்லை",
+    addFirstMedication: "உங்கள் முதல் மருந்தைச் சேர்க்கவும்",
+    total: "மொத்தம்",
+    taken: "எடுக்கப்பட்டது",
+    missed: "தவறிய",
+    upcoming: "வரவிருக்கும்",
+    chamber: "அறை",
+    
+    // AI and Chat
+    getAIAdvice: "AI ஆலோசனையைப் பெறுங்கள்",
+    aiMedicationAdvice: "AI மருந்து ஆலோசனை",
+    aiRecommendation: "AI பரிந்துரை",
+    reasoning: "காரணம்",
+    nextSteps: "அடுத்த படிகள்",
+    importantWarnings: "முக்கியமான எச்சரிக்கைகள்",
+    medicalDisclaimer: "மருத்துவ மறுப்பு",
+    disclaimerText: "இந்த ஆலோசனை தகவல் நோக்கங்களுக்காக மட்டுமே AI ஆல் உருவாக்கப்பட்டது. எந்த மருந்து முடிவுகளையும் எடுக்கும் முன் எப்போதும் உங்கள் சுகாதார வழங்குநரைக் கலந்தாலோசிக்கவும்.",
+    close: "மூடு",
+    contactHealthcare: "சுகாதார வழங்குநரைத் தொடர்பு கொள்ளவும்",
+    missedDosesAttention: "கவனம் தேவைப்படும் தவறிய டோஸ்கள்",
+    aiChatTitle: "AI உதவியாளருடன் அரட்டையடிக்கவும்",
+    aiChatPlaceholder: "உங்கள் மருந்துகள், பக்க விளைவுகள் அல்லது சுகாதார கவலைகள் பற்றி என்னிடம் கேளுங்கள்...",
+    aiChatSend: "அனுப்பு",
+    aiAnalyzing: "AI பகுப்பாய்வு செய்கிறது...",
+    aiTyping: "AI தட்டச்சு செய்கிறது...",
+    
+    // Reports and Analytics
+    medicineReport: "மருந்து அறிக்கை",
+    viewFullReport: "முழு அறிக்கையைப் பார்க்கவும்",
+    adherenceRate: "பின்பற்றுதல் விகிதம்",
+    onTimeRate: "நேரக்கூட்டு விகிதம்",
+    thisWeek: "இந்த வாரம்",
+    improvement: "முன்னேற்றம்",
+    missedDosesReport: "தவறிய டோஸ்கள்",
+    thisMonth: "இந்த மாதம்",
+    nextRefill: "அடுத்த ரீஃபில்",
+    inDays: "8 நாட்களில்",
+    
+    // Quick Actions
+    quickAIActions: "விரைவு AI செயல்கள்",
+    analyzeHealthTrends: "எனது சுகாதார போக்குகளை பகுப்பாய்வு செய்யுங்கள்",
+    getMissedDoseAdvice: "தவறிய டோஸ் ஆலோசனையைப் பெறுங்கள்",
+    optimizeSchedule: "அட்டவணையை மேம்படுத்துங்கள்",
+    
+    // Dispenser
+    bedroomDispenser: "படுக்கையறை டிஸ்பென்சர்",
+    pillsRemaining: "மீதமுள்ள மாத்திரைகள்",
+    low: "குறைவு",
+    syncDispenser: "டிஸ்பென்சரை ஒத்திசைக்கவும்",
+    dispenserDetails: "ஸ்மார்ட் டிஸ்பென்சர் விவரங்கள்",
+    connectionStatus: "இணைப்பு நிலை",
+    connected: "இணைக்கப்பட்டது",
+    disconnected: "துண்டிக்கப்பட்டது",
+    lastDispense: "கடைசி வினியோகம்",
+    successful: "வெற்றிகரமான",
+    failed: "தோல்வியுற்றது",
+    lastSeen: "கடைசியாக பார்க்கப்பட்டது"
+  },
+  pa: {
+    // App and Navigation
+    appName: "ਡੋਜ਼ਬੱਡੀ",
+    tagline: "ਸਮਾਰਟ ਦਵਾਈ ਪ੍ਰਬੰਧਨ ਸਿਸਟਮ",
+    aiPowered: "AI-ਸੰਚਾਲਿਤ ਸਿਹਤ ਸੇਵਾ",
+    dashboard: "ਡੈਸ਼ਬੋਰਡ",
+    medications: "ਦਵਾਈਆਂ",
+    schedule: "ਸਮਾਂ-ਸਾਰਣੀ",
+    members: "ਮੈਂਬਰ",
+    reports: "ਰਿਪੋਰਟਾਂ",
+    aiAssistant: "AI ਸਹਾਇਕ",
+    notifications: "ਸੂਚਨਾਵਾਂ",
+    settings: "ਸੈਟਿੰਗਾਂ",
+    
+    // Language
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ",
+    
+    // Member Management
+    goodMorning: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+    goodAfternoon: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+    goodEvening: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+    memberYou: "ਤੁਸੀਂ",
+    familyMember1: "ਪਰਿਵਾਰਕ ਮੈਂਬਰ 1",
+    familyMember2: "ਪਰਿਵਾਰਕ ਮੈਂਬਰ 2",
+    addMember: "ਮੈਂਬਰ ਜੋੜੋ",
+    medicationSchedule: "ਅੱਜ ਲਈ ਤੁਹਾਡੀ ਦਵਾਈ ਦੀ ਸਮਾਂ-ਸਾਰਣੀ ਇਹ ਹੈ",
+    
+    // AI Assistant
+    aiHealthAssistant: "AI ਸਿਹਤ ਸਹਾਇਕ",
+    aiDescription: "ਅਸਲ ਸਮੇਂ ਦੀ ਨਿਗਰਾਨੀ ਅਤੇ ਸਮਾਰਟ ਸਿਫਾਰਿਸ਼ਾਂ",
+    smartAnalysis: "ਸਮਾਰਟ ਵਿਸ਼ਲੇਸ਼ਣ",
+    smartAnalysisDesc: "AI ਤੁਹਾਡੇ ਦਵਾਈ ਪੈਟਰਨ ਦੀ ਨਿਗਰਾਨੀ ਕਰ ਰਿਹਾ ਹੈ",
+    smartAlerts: "ਸਮਾਰਟ ਅਲਰਟ",
+    smartAlertsDesc: "ਵਿਅਕਤੀਗਤ ਦਵਾਈ ਯਾਦਦਹਾਨੀਆਂ",
+    healthInsights: "ਸਿਹਤ ਸੂਝ-ਬੂਝ",
+    healthInsightsDesc: "ਪਾਲਣਾ ਅਤੇ ਸਿਹਤ ਰੁਝਾਨਾਂ ਨੂੰ ਟਰੈਕ ਕਰੋ",
+    active: "ਸਰਗਰਮ",
+    
+    // Status Cards
+    smartDispenser: "ਸਮਾਰਟ ਡਿਸਪੈਂਸਰ",
+    online: "ਆਨਲਾਈਨ",
+    offline: "ਆਫਲਾਈਨ",
+    unread: "ਨਾ ਪੜ੍ਹਿਆ",
+    missedDoses: "ਛੁੱਟੀਆਂ ਡੋਜ਼ਾਂ",
+    pending: "ਬਾਕੀ",
+    adherence: "ਪਾਲਣਾ",
+    
+    // Medications
+    todaysMedications: "ਅੱਜ ਦੀਆਂ ਦਵਾਈਆਂ",
+    allMedications: "ਸਾਰੀਆਂ ਦਵਾਈਆਂ",
+    addMedication: "ਦਵਾਈ ਜੋੜੋ",
+    addNew: "ਨਵਾਂ ਜੋੜੋ",
+    editMedication: "ਦਵਾਈ ਸੰਪਾਦਿਤ ਕਰੋ",
+    deleteMedication: "ਦਵਾਈ ਮਿਟਾਓ",
+    noMedicationsToday: "ਅੱਜ ਲਈ ਕੋਈ ਦਵਾਈ ਨਿਰਧਾਰਿਤ ਨਹੀਂ",
+    scheduleTodayMedications: "ਅੱਜ ਦੀਆਂ ਦਵਾਈਆਂ ਨੂੰ ਸਮਾਂ-ਸਾਰਣੀ ਬਣਾਓ",
+    noMedicationsFound: "ਕੋਈ ਦਵਾਈ ਨਹੀਂ ਮਿਲੀ",
+    addFirstMedication: "ਆਪਣੀ ਪਹਿਲੀ ਦਵਾਈ ਜੋੜੋ",
+    total: "ਕੁੱਲ",
+    taken: "ਲਿਆ ਗਿਆ",
+    missed: "ਛੁੱਟਿਆ",
+    upcoming: "ਆਉਣ ਵਾਲਾ",
+    chamber: "ਕਮਰਾ",
+    
+    // AI and Chat
+    getAIAdvice: "AI ਸਲਾਹ ਲਓ",
+    aiMedicationAdvice: "AI ਦਵਾਈ ਸਲਾਹ",
+    aiRecommendation: "AI ਸਿਫਾਰਿਸ਼",
+    reasoning: "ਤਰਕ",
+    nextSteps: "ਅਗਲੇ ਕਦਮ",
+    importantWarnings: "ਮਹੱਤਵਪੂਰਨ ਚੇਤਾਵਨੀਆਂ",
+    medicalDisclaimer: "ਮੈਡੀਕਲ ਬੇਦਾਅਵਾ",
+    disclaimerText: "ਇਹ ਸਲਾਹ ਸਿਰਫ ਜਾਣਕਾਰੀ ਦੇ ਉਦੇਸ਼ਾਂ ਲਈ AI ਦੁਆਰਾ ਤਿਆਰ ਕੀਤੀ ਗਈ ਹੈ। ਕੋਈ ਵੀ ਦਵਾਈ ਫੈਸਲਾ ਲੈਣ ਤੋਂ ਪਹਿਲਾਂ ਹਮੇਸ਼ਾ ਆਪਣੇ ਸਿਹਤ ਸੇਵਾ ਪ੍ਰਦਾਤਾ ਨਾਲ ਸਲਾਹ ਲਓ।",
+    close: "ਬੰਦ ਕਰੋ",
+    contactHealthcare: "ਸਿਹਤ ਸੇਵਾ ਪ੍ਰਦਾਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+    missedDosesAttention: "ਧਿਆਨ ਦੇਣ ਵਾਲੀਆਂ ਛੁੱਟੀਆਂ ਡੋਜ਼ਾਂ",
+    aiChatTitle: "AI ਸਹਾਇਕ ਨਾਲ ਗੱਲਬਾਤ ਕਰੋ",
+    aiChatPlaceholder: "ਆਪਣੀਆਂ ਦਵਾਈਆਂ, ਸਾਈਡ ਇਫੈਕਟਸ ਜਾਂ ਸਿਹਤ ਚਿੰਤਾਵਾਂ ਬਾਰੇ ਮੈਨੂੰ ਪੁੱਛੋ...",
+    aiChatSend: "ਭੇਜੋ",
+    aiAnalyzing: "AI ਵਿਸ਼ਲੇਸ਼ਣ ਕਰ ਰਿਹਾ ਹੈ...",
+    aiTyping: "AI ਟਾਈਪ ਕਰ ਰਿਹਾ ਹੈ...",
+    
+    // Reports and Analytics
+    medicineReport: "ਦਵਾਈ ਰਿਪੋਰਟ",
+    viewFullReport: "ਪੂਰੀ ਰਿਪੋਰਟ ਵੇਖੋ",
+    adherenceRate: "ਪਾਲਣਾ ਦਰ",
+    onTimeRate: "ਸਮੇਂ ਸਿਰ ਦਰ",
+    thisWeek: "ਇਸ ਹਫ਼ਤੇ",
+    improvement: "ਸੁਧਾਰ",
+    missedDosesReport: "ਛੁੱਟੀਆਂ ਡੋਜ਼ਾਂ",
+    thisMonth: "ਇਸ ਮਹੀਨੇ",
+    nextRefill: "ਅਗਲੀ ਰੀਫਿਲ",
+    inDays: "8 ਦਿਨਾਂ ਵਿੱਚ",
+    
+    // Quick Actions
+    quickAIActions: "ਤੁਰੰਤ AI ਕਾਰਵਾਈਆਂ",
+    analyzeHealthTrends: "ਮੇਰੇ ਸਿਹਤ ਰੁਝਾਨਾਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰੋ",
+    getMissedDoseAdvice: "ਛੁੱਟੀ ਡੋਜ਼ ਦੀ ਸਲਾਹ ਲਓ",
+    optimizeSchedule: "ਸਮਾਂ-ਸਾਰਣੀ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ",
+    
+    // Dispenser
+    bedroomDispenser: "ਬੈੱਡਰੂਮ ਡਿਸਪੈਂਸਰ",
+    pillsRemaining: "ਬਾਕੀ ਗੋਲੀਆਂ",
+    low: "ਘੱਟ",
+    syncDispenser: "ਡਿਸਪੈਂਸਰ ਸਿੰਕ ਕਰੋ",
+    dispenserDetails: "ਸਮਾਰਟ ਡਿਸਪੈਂਸਰ ਵਿਵਰਣ",
+    connectionStatus: "ਕਨੈਕਸ਼ਨ ਸਥਿਤੀ",
+    connected: "ਜੁੜਿਆ ਹੋਇਆ",
+    disconnected: "ਵਿਛੁੜਿਆ ਹੋਇਆ",
+    lastDispense: "ਆਖਰੀ ਵੰਡ",
+    successful: "ਸਫਲ",
+    failed: "ਅਸਫਲ",
+    lastSeen: "ਆਖਰੀ ਵਾਰ ਵੇਖਿਆ"
   }
 }
 
@@ -319,7 +556,7 @@ export default function PillDoseBuddyDashboard() {
   const [showMedicationForm, setShowMedicationForm] = useState(false)
   const [editingMedication, setEditingMedication] = useState<any>(null)
   const [selectedMember, setSelectedMember] = useState('sung')
-  const [currentLanguage, setCurrentLanguage] = useState<'en' | 'hi'>('en')
+  const [currentLanguage, setCurrentLanguage] = useState<'en' | 'hi' | 'ta' | 'pa'>('en')
   const [activeTab, setActiveTab] = useState('dashboard')
   const [aiChatMessages, setAiChatMessages] = useState<{role: 'user' | 'ai', message: string, timestamp: Date}[]>([])
   const [aiChatInput, setAiChatInput] = useState('')
@@ -355,11 +592,14 @@ export default function PillDoseBuddyDashboard() {
   }, [])
 
   const handleDeleteMedication = useCallback(async (medicationId: string) => {
-    const confirmMessage = currentLanguage === 'hi' 
-      ? 'क्या आप वाकई इस दवा को हटाना चाहते हैं?' 
-      : 'Are you sure you want to delete this medication?'
+    const confirmMessages = {
+      'en': 'Are you sure you want to delete this medication?',
+      'hi': 'क्या आप वाकई इस दवा को हटाना चाहते हैं?',
+      'ta': 'இந்த மருந்தை நீக்க விரும்புகிறீர்களா?',
+      'pa': 'ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਦਵਾਈ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?'
+    }
     
-    if (window.confirm(confirmMessage)) {
+    if (window.confirm(confirmMessages[currentLanguage])) {
       try {
         // Delete from Firebase
         await firebaseService.deleteDose(medicationId)
@@ -371,16 +611,22 @@ export default function PillDoseBuddyDashboard() {
           return { ...prev, doses: newDoses }
         })
         
-        const successMessage = currentLanguage === 'hi' 
-          ? 'दवा सफलतापूर्वक हटा दी गई!' 
-          : 'Medication deleted successfully!'
-        alert(successMessage)
+        const successMessages = {
+          'en': 'Medication deleted successfully!',
+          'hi': 'दवा सफलतापूर्वक हटा दी गई!',
+          'ta': 'மருந்து வெற்றிகரமாக நீக்கப்பட்டது!',
+          'pa': 'ਦਵਾਈ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾ ਦਿੱਤੀ ਗਈ!'
+        }
+        alert(successMessages[currentLanguage])
       } catch (error) {
         console.error('Error deleting medication:', error)
-        const errorMessage = currentLanguage === 'hi' 
-          ? 'दवा हटाने में त्रुटि। कृपया पुनः प्रयास करें।' 
-          : 'Failed to delete medication. Please try again.'
-        alert(errorMessage)
+        const errorMessages = {
+          'en': 'Failed to delete medication. Please try again.',
+          'hi': 'दवा हटाने में त्रुटि। कृपया पुनः प्रयास करें।',
+          'ta': 'மருந்தை நீக்குவதில் தோல்வி. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.',
+          'pa': 'ਦਵਾਈ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।'
+        }
+        alert(errorMessages[currentLanguage])
       }
     }
   }, [currentLanguage])
@@ -606,6 +852,7 @@ export default function PillDoseBuddyDashboard() {
             medication={editingMedication}
             onSubmit={handleMedicationFormSubmit}
             onCancel={handleMedicationFormCancel}
+            language={currentLanguage}
           />
         </div>
       </div>
@@ -669,11 +916,13 @@ export default function PillDoseBuddyDashboard() {
             {/* Language Selector */}
             <select 
               value={currentLanguage} 
-              onChange={(e) => setCurrentLanguage(e.target.value as 'en' | 'hi')}
+              onChange={(e) => setCurrentLanguage(e.target.value as 'en' | 'hi' | 'ta' | 'pa')}
               className="w-full bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
             >
               <option value="en">{t('english')}</option>
               <option value="hi">{t('hindi')}</option>
+              <option value="ta">{t('tamil')}</option>
+              <option value="pa">{t('punjabi')}</option>
             </select>
           </div>
 

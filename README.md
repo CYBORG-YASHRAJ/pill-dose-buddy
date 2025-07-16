@@ -1,23 +1,90 @@
-# DoseBuddy - AI-Powered Medication Management
+# DoseBuddy - AI-Powered Medication Management System
 
-## 🚀 Features Implemented
+## Features
+- ✅ **Complete Multilingual Support**: English, Hindi (हिंदी), Tamil (தமிழ்), and Punjabi (ਪੰਜਾਬੀ)
+- ✅ **AI-Powered Chat Assistant**: Intelligent medication management with GitHub Models integration
+- ✅ **Smart Medication Tracking**: Advanced dose scheduling and adherence monitoring
+- ✅ **Voice Synthesis**: Text-to-speech support for all languages
+- ✅ **Missed Dose Advisor**: Intelligent recommendations for missed medications
+- ✅ **Modern Dashboard**: Vertical tab layout with responsive design
+- ✅ **Landing Page**: Professional hero section with language selection
 
-### ✅ Fixed Issues
-1. **Medication Deletion**: Now properly deletes from Firebase and updates local state
-2. **Multilingual Support**: Full English/Hindi support across dashboard and landing page
-3. **White/Blue Theme**: Consistent white/blue theme applied to landing page
-4. **DoseBuddy Branding**: Clear DoseBuddy branding with AI emphasis
+## Setup Instructions
 
-### 🤖 Real AI Integration
-- **Real GPT-4 Integration**: Uses OpenAI GPT-4 through GitHub Models API
-- **Intelligent Health Reports**: AI-generated adherence analysis, health insights, and optimization suggestions
-- **Contextual Responses**: AI knows your medication data and provides personalized advice
-- **Voice Synthesis**: AI responses can be spoken aloud in your selected language
+### 1. Environment Configuration
 
-### 🎨 Landing Page Updates
-- **DoseBuddy Logo**: Prominently displays DoseBuddy branding
-- **AI Emphasis**: Highlights AI-powered features throughout
-- **White/Blue Theme**: Clean, professional medical theme
+Copy the example environment file:
+```bash
+cp .env.example .env.local
+```
+
+### 2. GitHub Models API Setup (Required for AI Chat)
+
+To enable the AI chat functionality, you need to configure a GitHub token with access to GitHub Models:
+
+1. Go to [GitHub Settings > Personal Access Tokens](https://github.com/settings/tokens)
+2. Click "Generate new token (classic)"
+3. Give it a name like "DoseBuddy AI"
+4. Select the following scopes:
+   - `model` (for GitHub Models access)
+   - `read:user` (basic user information)
+5. Copy the generated token
+6. Add it to your `.env.local` file:
+   ```
+   GITHUB_TOKEN=your_actual_token_here
+   ```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+# or
+pnpm install
+```
+
+### 4. Run the Development Server
+
+```bash
+npm run dev
+# or
+pnpm dev
+```
+
+Visit `http://localhost:3000` to see the application.
+
+## Language Support
+
+The application supports four languages with complete translations:
+
+- **English** - Default language
+- **Hindi (हिंदी)** - Full translation including AI responses
+- **Tamil (தமிழ்)** - Complete UI and voice synthesis support
+- **Punjabi (ਪੰਜਾਬੀ)** - Comprehensive multilingual integration
+
+### Language Features
+
+1. **UI Translation**: All interface elements are translated
+2. **Voice Synthesis**: Text-to-speech in all supported languages
+3. **AI Chat**: Intelligent responses in the user's preferred language
+4. **Fallback System**: If AI is unavailable, smart fallback responses are provided
+5. **Dynamic Language Switching**: Change language anytime from any component
+
+## AI Chat System
+
+The AI chat system provides:
+
+- **Intelligent Fallback**: If GitHub token is not configured, the system provides intelligent responses based on message content
+- **Multilingual AI**: AI responds in the user's selected language
+- **Context Awareness**: AI has access to medication data and user context
+- **Error Handling**: Graceful degradation when API is unavailable
+
+### AI Capabilities
+
+1. Medication adherence analysis
+2. Missed dose advice
+3. Schedule optimization suggestions
+4. Health insights and reports
+5. Personalized recommendations
 - **Multilingual Interface**: Complete English/Hindi support
 
 ### 📊 AI-Powered Dashboard

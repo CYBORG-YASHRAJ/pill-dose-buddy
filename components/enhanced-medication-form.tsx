@@ -8,16 +8,146 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Pill, Clock, Calendar, Plus, X } from 'lucide-react'
+import { Pill, Clock, Calendar, Plus, X, Languages } from 'lucide-react'
 import { firebaseService } from '@/lib/firebase-service'
+
+// Comprehensive translations for Enhanced Medication Form
+const translations = {
+  en: {
+    addNewMedication: "Add New Medication",
+    editMedication: "Edit Medication",
+    medicationName: "Medication Name",
+    medicationNamePlaceholder: "e.g., Aspirin, Metformin",
+    chamberNumber: "Chamber Number",
+    selectChamber: "Select chamber",
+    chamber: "Chamber",
+    numberOfPills: "Number of Pills",
+    scheduledTime: "Scheduled Time",
+    hour24Format: "Hour (24-hour format)",
+    hour: "Hour",
+    minute: "Minute",
+    selectedTime: "Selected time",
+    medicationDuration: "Medication Duration",
+    startDate: "Start Date",
+    endDate: "End Date",
+    specialConditions: "Special Conditions (Optional)",
+    specialConditionsPlaceholder: "e.g., Take with food, Monitor blood pressure, Take before bedtime",
+    addMedication: "Add Medication",
+    addingMedication: "Adding Medication...",
+    cancel: "Cancel",
+    endDateError: "End date must be after start date",
+    medicationAddedSuccess: "New medication added successfully",
+    medicationUpdatedSuccess: "Medication updated successfully",
+    failedToAddMedication: "Failed to add medication",
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ"
+  },
+  hi: {
+    addNewMedication: "नई दवा जोड़ें",
+    editMedication: "दवा संपादित करें",
+    medicationName: "दवा का नाम",
+    medicationNamePlaceholder: "जैसे, एस्पिरिन, मेटफॉर्मिन",
+    chamberNumber: "चैम्बर संख्या",
+    selectChamber: "चैम्बर चुनें",
+    chamber: "चैम्बर",
+    numberOfPills: "गोलियों की संख्या",
+    scheduledTime: "निर्धारित समय",
+    hour24Format: "घंटा (24-घंटे प्रारूप)",
+    hour: "घंटा",
+    minute: "मिनट",
+    selectedTime: "चयनित समय",
+    medicationDuration: "दवा की अवधि",
+    startDate: "शुरुआती तारीख",
+    endDate: "अंतिम तारीख",
+    specialConditions: "विशेष शर्तें (वैकल्पिक)",
+    specialConditionsPlaceholder: "जैसे, भोजन के साथ लें, रक्तचाप की निगरानी करें, सोने से पहले लें",
+    addMedication: "दवा जोड़ें",
+    addingMedication: "दवा जोड़ी जा रही है...",
+    cancel: "रद्द करें",
+    endDateError: "अंतिम तारीख शुरुआती तारीख के बाद होनी चाहिए",
+    medicationAddedSuccess: "नई दवा सफलतापूर्वक जोड़ी गई",
+    medicationUpdatedSuccess: "दवा सफलतापूर्वक अपडेट की गई",
+    failedToAddMedication: "दवा जोड़ने में असफल",
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ"
+  },
+  ta: {
+    addNewMedication: "புதிய மருந்தைச் சேர்க்கவும்",
+    editMedication: "மருந்தைத் திருத்தவும்",
+    medicationName: "மருந்தின் பெயர்",
+    medicationNamePlaceholder: "எ.கா., ஆஸ்பிரின், மெட்ஃபார்மின்",
+    chamberNumber: "அறை எண்",
+    selectChamber: "அறையைத் தேர்ந்தெடுக்கவும்",
+    chamber: "அறை",
+    numberOfPills: "மாத்திரைகளின் எண்ணிக்கை",
+    scheduledTime: "திட்டமிடப்பட்ட நேரம்",
+    hour24Format: "மணி (24-மணி நேர வடிவம்)",
+    hour: "மணி",
+    minute: "நிமிடம்",
+    selectedTime: "தேர்ந்தெடுக்கப்பட்ட நேரம்",
+    medicationDuration: "மருந்து கால அளவு",
+    startDate: "தொடக்க தேதி",
+    endDate: "முடிவு தேதி",
+    specialConditions: "சிறப்பு நிபந்தனைகள் (விருப்பத்தேர்வு)",
+    specialConditionsPlaceholder: "எ.கா., உணவுடன் எடுத்துக்கொள்ளவும், இரத்த அழுத்தத்தைக் கண்காணிக்கவும், தூங்குவதற்கு முன் எடுத்துக்கொள்ளவும்",
+    addMedication: "மருந்து சேர்க்கவும்",
+    addingMedication: "மருந்து சேர்க்கப்படுகிறது...",
+    cancel: "ரத்து செய்யவும்",
+    endDateError: "முடிவு தேதி தொடக்க தேதிக்குப் பின்னர் இருக்க வேண்டும்",
+    medicationAddedSuccess: "புதிய மருந்து வெற்றிகரமாகச் சேர்க்கப்பட்டது",
+    medicationUpdatedSuccess: "மருந்து வெற்றிகரமாக அப்டேட் செய்யப்பட்டது",
+    failedToAddMedication: "மருந்து சேர்க்கத் தவறியது",
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ"
+  },
+  pa: {
+    addNewMedication: "ਨਵੀਂ ਦਵਾਈ ਜੋੜੋ",
+    editMedication: "ਦਵਾਈ ਸੰਪਾਦਿਤ ਕਰੋ",
+    medicationName: "ਦਵਾਈ ਦਾ ਨਾਂ",
+    medicationNamePlaceholder: "ਜਿਵੇਂ, ਐਸਪਰਿਨ, ਮੈਟਫਾਰਮਿਨ",
+    chamberNumber: "ਕਮਰਾ ਨੰਬਰ",
+    selectChamber: "ਕਮਰਾ ਚੁਣੋ",
+    chamber: "ਕਮਰਾ",
+    numberOfPills: "ਗੋਲੀਆਂ ਦੀ ਗਿਣਤੀ",
+    scheduledTime: "ਨਿਰਧਾਰਿਤ ਸਮਾਂ",
+    hour24Format: "ਘੰਟਾ (24-ਘੰਟੇ ਦਾ ਫਾਰਮੈਟ)",
+    hour: "ਘੰਟਾ",
+    minute: "ਮਿੰਟ",
+    selectedTime: "ਚੁਣਿਆ ਗਿਆ ਸਮਾਂ",
+    medicationDuration: "ਦਵਾਈ ਦੀ ਮਿਆਦ",
+    startDate: "ਸ਼ੁਰੂਆਤੀ ਤਾਰੀਖ",
+    endDate: "ਅੰਤਿਮ ਤਾਰੀਖ",
+    specialConditions: "ਵਿਸ਼ੇਸ਼ ਸ਼ਰਤਾਂ (ਵਿਕਲਪਕ)",
+    specialConditionsPlaceholder: "ਜਿਵੇਂ, ਖਾਣੇ ਨਾਲ ਲਓ, ਬਲੱਡ ਪ੍ਰੈਸ਼ਰ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ, ਸੌਣ ਤੋਂ ਪਹਿਲਾਂ ਲਓ",
+    addMedication: "ਦਵਾਈ ਜੋੜੋ",
+    addingMedication: "ਦਵਾਈ ਜੋੜੀ ਜਾ ਰਹੀ ਹੈ...",
+    cancel: "ਰੱਦ ਕਰੋ",
+    endDateError: "ਅੰਤਿਮ ਤਾਰੀਖ ਸ਼ੁਰੂਆਤੀ ਤਾਰੀਖ ਤੋਂ ਬਾਅਦ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+    medicationAddedSuccess: "ਨਵੀਂ ਦਵਾਈ ਸਫਲਤਾਪੂਰਵਕ ਜੋੜੀ ਗਈ",
+    medicationUpdatedSuccess: "ਦਵਾਈ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੀ ਗਈ",
+    failedToAddMedication: "ਦਵਾਈ ਜੋੜਨ ਵਿੱਚ ਅਸਫਲ",
+    english: "English",
+    hindi: "हिंदी",
+    tamil: "தமிழ்",
+    punjabi: "ਪੰਜਾਬੀ"
+  }
+}
 
 interface MedicationFormProps {
   onSubmit: () => void
   onCancel: () => void
   medication?: any // Optional medication for editing
+  language?: 'en' | 'hi' | 'ta' | 'pa'
 }
 
-export default function EnhancedMedicationForm({ onSubmit, onCancel, medication }: MedicationFormProps) {
+export default function EnhancedMedicationForm({ onSubmit, onCancel, medication, language = 'en' }: MedicationFormProps) {
+  const [currentLanguage, setCurrentLanguage] = useState<'en' | 'hi' | 'ta' | 'pa'>(language)
   const [formData, setFormData] = useState({
     name: medication?.name || '',
     chamber: medication?.chamber || 0,
@@ -31,6 +161,9 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // Translation helper function
+  const t = (key: string) => translations[currentLanguage][key as keyof typeof translations['en']] || key
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -42,7 +175,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
       const endDate = new Date(formData.toDate)
       
       if (endDate <= startDate) {
-        throw new Error('End date must be after start date')
+        throw new Error(t('endDateError'))
       }
 
       // Calculate scheduled time for today
@@ -69,7 +202,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
         // Create notification for update
         await firebaseService.addNotification({
           type: 'doseDispensed',
-          message: `Medication "${formData.name}" updated successfully`,
+          message: t('medicationUpdatedSuccess').replace('${name}', formData.name),
           data: { action: 'medication_updated' },
           read: false
         })
@@ -80,7 +213,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
         // Create notification for add
         await firebaseService.addNotification({
           type: 'doseDispensed',
-          message: `New medication "${formData.name}" added successfully`,
+          message: t('medicationAddedSuccess').replace('${name}', formData.name),
           data: { action: 'medication_added' },
           read: false
         })
@@ -89,7 +222,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
       onSubmit()
     } catch (err) {
       console.error('Error adding medication:', err)
-      setError(err instanceof Error ? err.message : 'Failed to add medication')
+      setError(err instanceof Error ? err.message : t('failedToAddMedication'))
     } finally {
       setLoading(false)
     }
@@ -122,10 +255,26 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
     <div className="max-w-2xl mx-auto p-6">
       <Card className="border-2 border-blue-200">
         <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-lg">
-          <CardTitle className="flex items-center gap-2">
-            <Plus className="h-6 w-6" />
-            {medication ? 'Edit Medication' : 'Add New Medication'}
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <Plus className="h-6 w-6" />
+              {medication ? t('editMedication') : t('addNewMedication')}
+            </CardTitle>
+            
+            {/* Language Selector */}
+            <Select value={currentLanguage} onValueChange={(value: 'en' | 'hi' | 'ta' | 'pa') => setCurrentLanguage(value)}>
+              <SelectTrigger className="w-32 bg-white/10 border-white/20 text-white">
+                <Languages className="h-4 w-4 mr-2" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">{t('english')}</SelectItem>
+                <SelectItem value="hi">{t('hindi')}</SelectItem>
+                <SelectItem value="ta">{t('tamil')}</SelectItem>
+                <SelectItem value="pa">{t('punjabi')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </CardHeader>
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -141,13 +290,13 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
             <div className="space-y-2">
               <Label htmlFor="name" className="flex items-center gap-2">
                 <Pill className="h-4 w-4 text-blue-600" />
-                Medication Name
+                {t('medicationName')}
               </Label>
               <Input
                 id="name"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
-                placeholder="e.g., Aspirin, Metformin"
+                placeholder={t('medicationNamePlaceholder')}
                 required
                 className="border-gray-300 focus:border-blue-500"
               />
@@ -156,18 +305,18 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
             {/* Chamber and Pills Count */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="chamber">Chamber Number</Label>
+                <Label htmlFor="chamber">{t('chamberNumber')}</Label>
                 <Select 
                   value={formData.chamber.toString()} 
                   onValueChange={(value) => handleInputChange('chamber', parseInt(value))}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select chamber" />
+                    <SelectValue placeholder={t('selectChamber')} />
                   </SelectTrigger>
                   <SelectContent>
                     {chamberOptions.map(chamber => (
                       <SelectItem key={chamber} value={chamber.toString()}>
-                        Chamber {chamber}
+                        {t('chamber')} {chamber}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -175,7 +324,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="pills">Number of Pills</Label>
+                <Label htmlFor="pills">{t('numberOfPills')}</Label>
                 <Input
                   id="pills"
                   type="number"
@@ -193,17 +342,17 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
             <div className="space-y-2">
               <Label className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-blue-600" />
-                Scheduled Time
+                {t('scheduledTime')}
               </Label>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="hour" className="text-sm">Hour (24-hour format)</Label>
+                  <Label htmlFor="hour" className="text-sm">{t('hour24Format')}</Label>
                   <Select 
                     value={formData.hour.toString()} 
                     onValueChange={(value) => handleInputChange('hour', parseInt(value))}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Hour" />
+                      <SelectValue placeholder={t('hour')} />
                     </SelectTrigger>
                     <SelectContent>
                       {hourOptions.map(hour => (
@@ -216,13 +365,13 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
                 </div>
 
                 <div>
-                  <Label htmlFor="minute" className="text-sm">Minute</Label>
+                  <Label htmlFor="minute" className="text-sm">{t('minute')}</Label>
                   <Select 
                     value={formData.minute.toString()} 
                     onValueChange={(value) => handleInputChange('minute', parseInt(value))}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Minute" />
+                      <SelectValue placeholder={t('minute')} />
                     </SelectTrigger>
                     <SelectContent>
                       {minuteOptions.map(minute => (
@@ -235,7 +384,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
                 </div>
               </div>
               <p className="text-sm text-gray-500">
-                Selected time: {formData.hour.toString().padStart(2, '0')}:{formData.minute.toString().padStart(2, '0')}
+                {t('selectedTime')}: {formData.hour.toString().padStart(2, '0')}:{formData.minute.toString().padStart(2, '0')}
               </p>
             </div>
 
@@ -243,11 +392,11 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
             <div className="space-y-2">
               <Label className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-blue-600" />
-                Medication Duration
+                {t('medicationDuration')}
               </Label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="fromDate" className="text-sm">Start Date</Label>
+                  <Label htmlFor="fromDate" className="text-sm">{t('startDate')}</Label>
                   <Input
                     id="fromDate"
                     type="date"
@@ -259,7 +408,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
                 </div>
 
                 <div>
-                  <Label htmlFor="toDate" className="text-sm">End Date</Label>
+                  <Label htmlFor="toDate" className="text-sm">{t('endDate')}</Label>
                   <Input
                     id="toDate"
                     type="date"
@@ -275,12 +424,12 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
 
             {/* Special Conditions */}
             <div className="space-y-2">
-              <Label htmlFor="conditions">Special Conditions (Optional)</Label>
+              <Label htmlFor="conditions">{t('specialConditions')}</Label>
               <Textarea
                 id="conditions"
                 value={formData.conditions}
                 onChange={(e) => handleInputChange('conditions', e.target.value)}
-                placeholder="e.g., Take with food, Monitor blood pressure, Take before bedtime"
+                placeholder={t('specialConditionsPlaceholder')}
                 rows={3}
                 className="border-gray-300 focus:border-blue-500"
               />
@@ -296,12 +445,12 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
                 {loading ? (
                   <div className="flex items-center gap-2">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    Adding Medication...
+                    {t('addingMedication')}
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
                     <Plus className="h-4 w-4" />
-                    Add Medication
+                    {t('addMedication')}
                   </div>
                 )}
               </Button>
@@ -314,7 +463,7 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication 
                 className="flex items-center gap-2"
               >
                 <X className="h-4 w-4" />
-                Cancel
+                {t('cancel')}
               </Button>
             </div>
           </form>
