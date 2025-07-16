@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Pill, Clock, Calendar, Plus, X, Languages } from 'lucide-react'
 import { firebaseService } from '@/lib/firebase-service'
+import { notifyDoseCreated } from '@/lib/email-notifications'
 
 // Comprehensive translations for Enhanced Medication Form
 const translations = {
@@ -206,6 +207,26 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication,
           data: { action: 'medication_updated' },
           read: false
         })
+
+        // Send email notification for update
+        try {
+          const scheduleTime = `${formData.hour.toString().padStart(2, '0')}:${formData.minute.toString().padStart(2, '0')}`
+          const memberName = 'Primary' // Default member name
+          
+          await notifyDoseCreated(
+            formData.name,
+            `${formData.pills} ${formData.pills === 1 ? 'pill' : 'pills'}`,
+            `Daily at ${scheduleTime} (Updated)`,
+            formData.fromDate,
+            memberName,
+            currentLanguage
+          )
+          
+          console.log('Email notification sent for medication update')
+        } catch (emailError) {
+          console.error('Failed to send email notification for update:', emailError)
+          // Don't fail the entire operation if email fails
+        }
       } else {
         // Add new medication
         await firebaseService.addDose(dose)
@@ -217,6 +238,26 @@ export default function EnhancedMedicationForm({ onSubmit, onCancel, medication,
           data: { action: 'medication_added' },
           read: false
         })
+
+        // Send email notification
+        try {
+          const scheduleTime = `${formData.hour.toString().padStart(2, '0')}:${formData.minute.toString().padStart(2, '0')}`
+          const memberName = 'Primary' // Default member name
+          
+          await notifyDoseCreated(
+            formData.name,
+            `${formData.pills} ${formData.pills === 1 ? 'pill' : 'pills'}`,
+            `Daily at ${scheduleTime}`,
+            formData.fromDate,
+            memberName,
+            currentLanguage
+          )
+          
+          console.log('Email notification sent successfully')
+        } catch (emailError) {
+          console.error('Failed to send email notification:', emailError)
+          // Don't fail the entire operation if email fails
+        }
       }
 
       onSubmit()

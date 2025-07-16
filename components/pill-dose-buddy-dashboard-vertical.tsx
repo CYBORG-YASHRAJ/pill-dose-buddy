@@ -50,6 +50,7 @@ import {
 import { firebaseService, type Dose, type Notification, type PillDispenser } from '@/lib/firebase-service'
 import EnhancedMedicationForm from '@/components/enhanced-medication-form'
 import { useVoiceSynthesis } from '@/lib/voice-synthesis'
+import { notifyDoseMissed } from '@/lib/email-notifications'
 
 // Comprehensive translations object for English, Hindi, and Tamil
 const translations = {
@@ -630,6 +631,87 @@ export default function PillDoseBuddyDashboard() {
       }
     }
   }, [currentLanguage])
+
+  // Missed dose detection and email notification function
+  const checkAndNotifyMissedDoses = useCallback(async () => {
+    try {
+      const now = Date.now()
+      const MISSED_THRESHOLD = 30 * 60 * 1000 // 30 minutes grace period
+      
+      Object.entries(dashboardData.doses).forEach(async ([doseId, dose]) => {
+        // Check if dose is overdue and not yet marked as missed
+        if (dose.status === 'upcoming' && (now - dose.time) > MISSED_THRESHOLD) {
+          // Mark as missed in Firebase
+          await firebaseService.updateDoseStatus(doseId, 'missed')
+          
+          // Calculate missed duration
+          const missedMs = now - dose.time
+          const missedMinutes = Math.floor(missedMs / (1000 * 60))
+          const missedHours = Math.floor(missedMinutes / 60)
+          
+          let missedDuration = ''
+          if (missedHours > 0) {
+            const remainingMinutes = missedMinutes % 60
+            missedDuration = `${missedHours}h ${remainingMinutes}m`
+          } else {
+            missedDuration = `${missedMinutes}m`
+          }
+          
+          // Format scheduled time
+          const scheduledTime = new Date(dose.time).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          })
+          
+          // Send email notification for missed dose
+          try {
+            await notifyDoseMissed(
+              dose.name,
+              scheduledTime,
+              missedDuration,
+              `${dose.count} ${dose.count === 1 ? 'pill' : 'pills'}`,
+              'Primary', // Default member name
+              'Please consult the DoseBuddy app for personalized missed dose guidance.',
+              currentLanguage
+            )
+            
+            console.log(`Missed dose email sent for ${dose.name}`)
+            
+            // Add notification to Firebase
+            await firebaseService.addNotification({
+              type: 'missedDose',
+              message: `Missed dose: ${dose.name} was due at ${scheduledTime}`,
+              data: { 
+                doseId,
+                action: 'missed_dose_detected',
+                chamber: dose.chamber,
+                medication: dose.name,
+                scheduledTime,
+                missedDuration
+              },
+              read: false
+            })
+            
+          } catch (emailError) {
+            console.error('Failed to send missed dose email:', emailError)
+          }
+        }
+      })
+    } catch (error) {
+      console.error('Error checking missed doses:', error)
+    }
+  }, [dashboardData.doses, currentLanguage])
+
+  // Run missed dose check every 5 minutes
+  useEffect(() => {
+    const interval = setInterval(checkAndNotifyMissedDoses, 5 * 60 * 1000) // 5 minutes
+    
+    // Also run on component mount and when doses change
+    checkAndNotifyMissedDoses()
+    
+    return () => clearInterval(interval)
+  }, [checkAndNotifyMissedDoses])
 
   // Enhanced AI Chat with voice response
   const handleAiChat = async () => {
